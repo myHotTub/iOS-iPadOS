@@ -5,8 +5,20 @@ import LiteSlider
 struct TemperatureControlSlider: View {
 	@Environment(ContentManager.self) var contentManager
 	
-	@State private var sliderValue: Double = 30.0
+	@State private var sliderValue: Double = 0
 	@State private var isDragging: Bool    = false
+	
+	var temperatureScale: (minimum: Double, maximum: Double) {
+		guard contentManager.connectionMonitor.isConnected else {
+			return (20, 40)
+		}
+		
+		switch (contentManager.states.unt) {
+		case (0): return (68, 104)
+		case (1): return (20, 40)
+		default: return (20, 40)
+		}
+	}
 	
 	var body: some View {
 		let thumbView: (Bool) -> some View = { isDragging in
@@ -18,7 +30,7 @@ struct TemperatureControlSlider: View {
 		
 		LiteSlider(
 			value: $sliderValue,
-			in: 20...40,
+			in: temperatureScale.minimum...temperatureScale.maximum,
 			step: 1,
 			thumbView: thumbView
 		)
