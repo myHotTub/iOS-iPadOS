@@ -18,14 +18,13 @@ struct ControlsView: View {
 					ToolbarItem(placement: .topBarLeading) {
 						SignalStrengthButton()
 					}
-					// Removed until toggling power is supported.
+//					Removed until toggling power is supported.
 //					ToolbarItem(placement: .topBarTrailing) {
 //						PowerButton()
 //					}
 				}
 				.refreshable {
 					contentManager.refreshConnection()
-					
 					try? await Task.sleep(for: .seconds(0.5))
 				}
 			}

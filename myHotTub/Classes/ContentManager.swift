@@ -1,7 +1,5 @@
 
 import Foundation
-import Observation
-import SwiftUI
 
 @MainActor
 @Observable
@@ -29,7 +27,7 @@ class ContentManager {
 	@Observable
 	class States {
 		var air: Int?      = nil // The bubbles state.
-		var amb: Int      = 0 // The ambient temperature.
+		var amb: Int       = 0 // The ambient temperature.
 		var ambc: Int      = 0 // The ambient temperature in Celsius.
 		var ambf: Int      = 0 // The ambient temperature in Fahrenheit.
 		var brt: Int?      = nil // The display brightness.
@@ -66,9 +64,9 @@ class ContentManager {
 		var dbg: String?                = nil // Debug information.
 		var fcle: TimeInterval?         = nil // The last filter clean timestamp.
 		var fclei: Int?                 = nil // The filter clean interval in days.
-		var frep: Int         = 99999 // The last filter replacement timestamp.
+		var frep: Int                   = 99999 // The last filter replacement timestamp.
 		var frepi: Int?                 = nil // The filter replacement interval in days.
-		var frin: Int         = 99999 // The last filter rinse timestamp.
+		var frin: Int                   = 99999 // The last filter rinse timestamp.
 		var frini: Int?                 = nil // The filter rinse interval in days.
 		var heatingtime: TimeInterval?  = nil // The total heating runtime.
 		var jettime: TimeInterval?      = nil // The total HydroJets runtime.
@@ -88,7 +86,6 @@ class ContentManager {
 	}
 	
 	var webSocketTask: URLSessionWebSocketTask?
-	private var isManualRefresh: Bool?  = nil
 	
 	// This function establishes WebSocket connectivity with the ESP8266 module.
 	func establishConnection() {
@@ -463,10 +460,11 @@ class ContentManager {
 		}
 	}
 	
-	func sendCommand(webSocketTask: URLSessionWebSocketTask?,
-					cmd: String,
-					value: Any = 0) {
-		
+	func sendCommand(
+		webSocketTask: URLSessionWebSocketTask?,
+		cmd: String,
+		value: Any = 0
+	) {
 		print(cmd)
 		
 		// Command mappings - using the actual numeric values from your JavaScript

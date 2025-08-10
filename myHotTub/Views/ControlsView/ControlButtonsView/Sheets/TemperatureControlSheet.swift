@@ -70,8 +70,6 @@ struct TemperatureControlSheet: View {
 					.multilineTextAlignment(.center)
 					.frame(maxWidth: .infinity, alignment: .center)
 					.padding(.all, 20)
-				
-				
 			}
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.toolbar {
