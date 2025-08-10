@@ -1,0 +1,15 @@
+{
+  "originHash" : "d9cf654461b963e2dd9887c078d422ca355baa1eef3e8beae8b775e726abc4a6",
+  "pins" : [
+    {
+      "identity" : "liteslider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SylvainRX/LiteSlider.git",
+      "state" : {
+        "revision" : "7f44646e01361a4670c7d2b6bb109790e94bd043",
+        "version" : "0.1.1"
+      }
+    }
+  ],
+  "version" : 3
+}
