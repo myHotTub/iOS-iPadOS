@@ -18,24 +18,24 @@ struct SettingsView: View {
 					}
 				}
 				
-				
-				HStack {
-					Button("Restart ESP8266 Module", role: .destructive) {
-						showRestartAlert.toggle()
-						
-					}
-					.alert(isPresented: $showRestartAlert) {
-						Alert(
-							title: Text("Restart ESP8266 Module"),
-							message: Text("This will restart the ESP8266 Module. It may take a while for the ESP8266 module to reboot and reconnect to your Wi-Fi network."),
-							primaryButton: .destructive(Text("Restart")) {
-								contentManager.sendCommand(webSocketTask: contentManager.webSocketTask, cmd: "restartEsp")
-							},
-							secondaryButton: .cancel()
-						)
-					}
-					.buttonStyle(.automatic)
-				}
+//				Removed until the logic for reconnecting is more robust.
+//				HStack {
+//					Button("Restart ESP8266 Module", role: .destructive) {
+//						showRestartAlert.toggle()
+//						
+//					}
+//					.alert(isPresented: $showRestartAlert) {
+//						Alert(
+//							title: Text("Restart ESP8266 Module"),
+//							message: Text("This will restart the ESP8266 Module. It may take a while for the ESP8266 module to reboot and reconnect to your Wi-Fi network."),
+//							primaryButton: .destructive(Text("Restart")) {
+//								contentManager.sendCommand(webSocketTask: contentManager.webSocketTask, cmd: "restartEsp")
+//							},
+//							secondaryButton: .cancel()
+//						)
+//					}
+//					.buttonStyle(.automatic)
+//				}
 			}
 			.navigationTitle("Settings")
 		}
