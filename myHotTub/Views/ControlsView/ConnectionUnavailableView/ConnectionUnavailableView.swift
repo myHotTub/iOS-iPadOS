@@ -13,11 +13,9 @@ struct ConnectionUnavailableView: View {
 									
 				VStack(alignment: .leading) {
 					Text("Unable to connect the the ESP8266 Module!")
-						
 					Text("Please confirm that the module is connected to your Wi-Fi network. Retry attempt number \(connectionAttempt).")
 				}
 				.font(.footnote)
-//				.foregroundColor(.secondary)
 			}
 			.padding(.vertical, 8)
 			.background(Color(.systemGray6))
