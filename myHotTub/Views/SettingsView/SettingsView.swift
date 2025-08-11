@@ -13,13 +13,11 @@ struct SettingsView: View {
 					NavigationLink(destination: AboutView()) {
 						Text("About")
 					}
-				}
-				
-				Section(header: Text("Appearance")) {
 					NavigationLink(destination: AppearanceView()) {
 						Text("Appearance")
 					}
 				}
+				
 				
 				HStack {
 					Button("Restart ESP8266 Module", role: .destructive) {
