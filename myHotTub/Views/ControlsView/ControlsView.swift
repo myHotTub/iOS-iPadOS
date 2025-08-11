@@ -6,6 +6,9 @@ struct ControlsView: View {
 	
 	var body: some View {
 		NavigationStack {
+			if !contentManager.connectionMonitor.isConnected && contentManager.connectionMonitor.connectionAttempt >= 3 {
+				ConnectionUnavailableView(connectionAttempt: contentManager.connectionMonitor.connectionAttempt)
+			}
 			GeometryReader { geometry in
 				List {
 					ControlButtonsView(availableSize: geometry.size)

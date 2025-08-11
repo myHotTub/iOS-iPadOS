@@ -83,6 +83,7 @@ class ContentManager {
 	@Observable
 	class ConnectionMonitor {
 		var isConnected: Bool = false
+		var connectionAttempt: Int = 0
 	}
 	
 	var webSocketTask: URLSessionWebSocketTask?
@@ -103,7 +104,7 @@ class ContentManager {
 		// Constructs the header information required to connect to the ESP8266 module successfully.
 		var request = URLRequest(url: moduleUrl)
 		request.setValue("arduino", forHTTPHeaderField: "Sec-WebSocket-Protocol")
-		request.timeoutInterval = 5.0
+		request.timeoutInterval = 3.0
 		
 		// Establishes the connection to the ESP8266 module.
 		webSocketTask = URLSession.shared.webSocketTask(with: request)
@@ -135,7 +136,8 @@ class ContentManager {
 			Task { @MainActor in
 				switch contentReceived {
 				case .success(let receivedContent):
-					connectionMonitor.isConnected = true
+					connectionMonitor.isConnected       = true
+					connectionMonitor.connectionAttempt = 0
 					switch receivedContent {
 					case .data:
 						break
@@ -148,6 +150,7 @@ class ContentManager {
 					self.receiveContent()
 				case .failure:
 					connectionMonitor.isConnected = false
+					connectionMonitor.connectionAttempt += 1
 					self.refreshConnection()
 				}
 			}
