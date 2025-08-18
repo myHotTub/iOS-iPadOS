@@ -1,7 +1,5 @@
 
 import Foundation
-import Observation
-import SwiftUI
 
 @MainActor
 @Observable
@@ -29,7 +27,7 @@ class ContentManager {
 	@Observable
 	class States {
 		var air: Int?      = nil // The bubbles state.
-		var amb: Int      = 0 // The ambient temperature.
+		var amb: Int       = 0 // The ambient temperature.
 		var ambc: Int      = 0 // The ambient temperature in Celsius.
 		var ambf: Int      = 0 // The ambient temperature in Fahrenheit.
 		var brt: Int?      = nil // The display brightness.
@@ -66,9 +64,9 @@ class ContentManager {
 		var dbg: String?                = nil // Debug information.
 		var fcle: TimeInterval?         = nil // The last filter clean timestamp.
 		var fclei: Int?                 = nil // The filter clean interval in days.
-		var frep: Int         = 99999 // The last filter replacement timestamp.
+		var frep: Int                   = 99999 // The last filter replacement timestamp.
 		var frepi: Int?                 = nil // The filter replacement interval in days.
-		var frin: Int         = 99999 // The last filter rinse timestamp.
+		var frin: Int                   = 99999 // The last filter rinse timestamp.
 		var frini: Int?                 = nil // The filter rinse interval in days.
 		var heatingtime: TimeInterval?  = nil // The total heating runtime.
 		var jettime: TimeInterval?      = nil // The total HydroJets runtime.
@@ -85,10 +83,10 @@ class ContentManager {
 	@Observable
 	class ConnectionMonitor {
 		var isConnected: Bool = false
+		var connectionAttempt: Int = 0
 	}
 	
 	var webSocketTask: URLSessionWebSocketTask?
-	private var isManualRefresh: Bool?  = nil
 	
 	// This function establishes WebSocket connectivity with the ESP8266 module.
 	func establishConnection() {
@@ -106,7 +104,7 @@ class ContentManager {
 		// Constructs the header information required to connect to the ESP8266 module successfully.
 		var request = URLRequest(url: moduleUrl)
 		request.setValue("arduino", forHTTPHeaderField: "Sec-WebSocket-Protocol")
-		request.timeoutInterval = 5.0
+		request.timeoutInterval = 3.0
 		
 		// Establishes the connection to the ESP8266 module.
 		webSocketTask = URLSession.shared.webSocketTask(with: request)
@@ -138,7 +136,8 @@ class ContentManager {
 			Task { @MainActor in
 				switch contentReceived {
 				case .success(let receivedContent):
-					connectionMonitor.isConnected = true
+					connectionMonitor.isConnected       = true
+					connectionMonitor.connectionAttempt = 0
 					switch receivedContent {
 					case .data:
 						break
@@ -151,6 +150,7 @@ class ContentManager {
 					self.receiveContent()
 				case .failure:
 					connectionMonitor.isConnected = false
+					connectionMonitor.connectionAttempt += 1
 					self.refreshConnection()
 				}
 			}
@@ -463,10 +463,11 @@ class ContentManager {
 		}
 	}
 	
-	func sendCommand(webSocketTask: URLSessionWebSocketTask?,
-					cmd: String,
-					value: Any = 0) {
-		
+	func sendCommand(
+		webSocketTask: URLSessionWebSocketTask?,
+		cmd: String,
+		value: Any = 0
+	) {
 		print(cmd)
 		
 		// Command mappings - using the actual numeric values from your JavaScript

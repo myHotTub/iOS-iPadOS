@@ -3,7 +3,7 @@ import SwiftUI
 
 @main
 struct myHotTubApp: App {
-	let contentManager = ContentManager()
+	let contentManager    = ContentManager()
 	let connectionManager = ConnectionManager()
 	
     var body: some Scene {
@@ -11,7 +11,6 @@ struct myHotTubApp: App {
             ContentView()
 				.environment(contentManager)
 				.environment(connectionManager)
-
         }
     }
 }

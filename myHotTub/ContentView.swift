@@ -18,7 +18,6 @@ struct ContentView: View {
 	}
 }
 
-
 #Preview {
 	let contentManager = ContentManager()
 	

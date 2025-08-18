@@ -37,6 +37,19 @@ struct TemperatureControlSheet: View {
 		}
 	}
 	
+	var heaterButtonState: (icon: String, color: Color, toggle: Bool) {
+		guard contentManager.connectionMonitor.isConnected else {
+			return ("power.circle.fill", .yellow, false)
+		}
+		
+		switch (contentManager.states.grn, contentManager.states.red) {
+		case (0, 0): return ("power.circle.fill", .white, true)
+		case (1, 0): return ("power.circle.fill", .white, false)
+		case (0, 1): return ("power.circle.fill", .white, false)
+		default: return ("power.circle.fill", .yellow, false)
+		}
+	}
+	
     var body: some View {
 		NavigationStack {
 			VStack {
@@ -63,6 +76,14 @@ struct TemperatureControlSheet: View {
 				
 				TemperatureControlSlider()
 				
+				Button {
+					contentManager.sendCommand(webSocketTask: contentManager.webSocketTask, cmd: "toggleHeater", value: heaterButtonState.toggle)
+				} label: {
+					Image(systemName: heaterButtonState.icon)
+						.font(.custom("System", size: 70, relativeTo: .title))
+						.foregroundStyle(heaterButtonState.color)
+				}
+				
 				Spacer()
 				
 				Text("Ready In: \(heaterState.ready)")
@@ -70,8 +91,6 @@ struct TemperatureControlSheet: View {
 					.multilineTextAlignment(.center)
 					.frame(maxWidth: .infinity, alignment: .center)
 					.padding(.all, 20)
-				
-				
 			}
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.toolbar {

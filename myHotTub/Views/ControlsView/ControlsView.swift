@@ -6,6 +6,9 @@ struct ControlsView: View {
 	
 	var body: some View {
 		NavigationStack {
+			if !contentManager.connectionMonitor.isConnected && contentManager.connectionMonitor.connectionAttempt >= 3 {
+				ConnectionUnavailableView(connectionAttempt: contentManager.connectionMonitor.connectionAttempt)
+			}
 			GeometryReader { geometry in
 				List {
 					ControlButtonsView(availableSize: geometry.size)
@@ -18,14 +21,13 @@ struct ControlsView: View {
 					ToolbarItem(placement: .topBarLeading) {
 						SignalStrengthButton()
 					}
-					// Removed until toggling power is supported.
+//					Removed until toggling power is supported.
 //					ToolbarItem(placement: .topBarTrailing) {
 //						PowerButton()
 //					}
 				}
 				.refreshable {
 					contentManager.refreshConnection()
-					
 					try? await Task.sleep(for: .seconds(0.5))
 				}
 			}

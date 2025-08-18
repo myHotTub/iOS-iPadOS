@@ -3,6 +3,7 @@ import SwiftUI
 
 struct ControlButtonsView: View {
 	@Environment(\.verticalSizeClass) var verticalSizeClass
+	@Environment(ContentManager.self) var contentManager
 	
 	let availableSize: CGSize
 	
@@ -22,7 +23,14 @@ struct ControlButtonsView: View {
 				TemperatureControlButton()
 				VStack {
 					PumpControlButton()
-					BubbleControlButton()
+					if contentManager.other.hasjets ?? false {
+						HStack {
+							BubbleControlButtonSmall()
+							HydroJetControlButton()
+						}
+					} else {
+						BubbleControlButton()
+					}
 				}
 			}
 			.fixedSize(horizontal: false, vertical: true)
