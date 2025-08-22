@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>This app connects to your Hot Tub's ESP8266 module on your local network to allow you to control and monitor your Hot Tub.</string>
+	<string>This app connects to your Hot Tub&apos;s ESP8266 module on your local network to allow you to control and monitor your Hot Tub.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 </dict>
 </plist>
