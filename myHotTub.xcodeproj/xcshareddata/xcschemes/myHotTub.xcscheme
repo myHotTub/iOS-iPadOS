@@ -50,6 +50,9 @@
             ReferencedContainer = "container:myHotTub.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <StoreKitConfigurationFileReference
+         identifier = "../../myHotTub/StoreKit/myHotTub.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -79,7 +82,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "# Generate build number in YYYYMMDDHHMM format&#10;BUILD_NUMBER=$(date +&quot;%Y%m%d%H%M&quot;)&#10;&#10;# Update the source Info.plist file&#10;/usr/libexec/PlistBuddy -c &quot;Set :CFBundleVersion $BUILD_NUMBER&quot; &quot;${PROJECT_DIR}/${INFOPLIST_FILE}&quot;&#10;">
+               scriptText = "# Generate build number in YYYYMMDDHHMM format&#10;BUILD_NUMBER=$(date +&quot;%Y%m%d%H%M&quot;)&#10;&#10;# Update the source Info.plist file&#10;/usr/libexec/PlistBuddy -c &quot;Set :CFBundleVersion $BUILD_NUMBER&quot; &quot;${TARGET_BUILD_DIR}/${INFOPLIST_PATH}&quot;&#10;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
