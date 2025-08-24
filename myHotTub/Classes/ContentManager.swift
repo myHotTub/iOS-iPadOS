@@ -1,14 +1,16 @@
 
 import Foundation
+import Observation
 
 @MainActor
 @Observable
 class ContentManager {
+	let connectionManager = ConnectionManager()
 	let other             = Other()
 	let states            = States()
 	let times             = Times()
 	let connectionMonitor = ConnectionMonitor()
-	let connectionManager = ConnectionManager()
+	
 	let timeConverter     = TimeConverter()
 	
 	@Observable
@@ -81,6 +83,31 @@ class ContentManager {
 	}
 	
 	@Observable
+	class ConnectionManager {
+		let configuration = Configuration()
+			
+		class Configuration {
+			enum WebSocketSchemes: String {
+				case webSocket       = "ws://"
+				case webSocketSecure = "wss://"
+			}
+			
+			static let defaultHostname: String = "layzspa.local"
+			static let defaultIp: String       = "192.168.4.2"
+			static let defaultPort: Int        = 81
+			
+			let defaultModuleUrl: String  = "\(WebSocketSchemes.webSocket.rawValue)\(defaultHostname):\(defaultPort)"
+			let fallbackModuleUrl: String = "\(WebSocketSchemes.webSocket.rawValue)\(defaultIp):\(defaultPort)"
+			
+			var userIp: String = ""
+			
+			var userModuleUrl: String {
+				return "\(WebSocketSchemes.webSocket.rawValue)\(userIp):\(Self.defaultPort)"
+			}
+		}
+	}
+	
+	@Observable
 	class ConnectionMonitor {
 		var isConnected: Bool = false
 		var connectionAttempt: Int = 0
@@ -88,8 +115,12 @@ class ContentManager {
 	
 	var webSocketTask: URLSessionWebSocketTask?
 	
-	// This function establishes WebSocket connectivity with the ESP8266 module.
-	func establishConnection() {
+	enum ModuleUrlType {
+		case moduleDefault
+		case userDefined
+	}
+	
+	func establishConnection(urlType: ModuleUrlType) {
 		// Prevents establishConnection() from attempting to establish a new connection if a connection is already established or if a connection attempt is in progress.
 		guard !self.connectionMonitor.isConnected else {
 			return
@@ -98,9 +129,20 @@ class ContentManager {
 		// Closes any existing connections (should they be found) before establishing a new connection.
 		webSocketTask?.cancel(with: .goingAway, reason: nil)
 		
-		// Constructs the URL used to connect to the ESP8266 module.
-		let moduleUrl = URL(string: "\(connectionManager.configuration.defaultModuleUrl)")!
+		self.connectionMonitor.isConnected = false
 		
+		// Determine which URL to use based on the parameter
+		let urlString: String
+		switch urlType {
+		case .moduleDefault:
+			urlString = connectionManager.configuration.defaultModuleUrl
+		case .userDefined:
+			urlString = connectionManager.configuration.userModuleUrl
+		}
+		
+		// Constructs the URL used to connect to the ESP8266 module.
+		let moduleUrl = URL(string: urlString)!
+				
 		// Constructs the header information required to connect to the ESP8266 module successfully.
 		var request = URLRequest(url: moduleUrl)
 		request.setValue("arduino", forHTTPHeaderField: "Sec-WebSocket-Protocol")
@@ -121,8 +163,12 @@ class ContentManager {
 			return
 		}
 		
-		// Call function establishConnection().
-		establishConnection()
+		// Call function establishConnection()
+		if connectionManager.configuration.userIp.isEmpty {
+			establishConnection(urlType: .moduleDefault)
+		} else {
+			establishConnection(urlType: .userDefined)
+		}
 	}
 	
 	// This function receives messages from the WebSocket server on the ESP8266 module and assigns them to the appropriate variable in ContentManager().

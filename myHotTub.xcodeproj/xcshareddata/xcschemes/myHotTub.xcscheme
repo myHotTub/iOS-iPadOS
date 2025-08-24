@@ -50,6 +50,9 @@
             ReferencedContainer = "container:myHotTub.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <StoreKitConfigurationFileReference
+         identifier = "../../myHotTub/StoreKit/LocalSyncedProducts.storekit">
+      </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

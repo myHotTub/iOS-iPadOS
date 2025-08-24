@@ -2,6 +2,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+	
 	@Environment(ContentManager.self) var contentManager
 	
 	@State private var showRestartAlert: Bool = false

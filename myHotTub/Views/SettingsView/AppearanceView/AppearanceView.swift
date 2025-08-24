@@ -2,7 +2,12 @@
 import SwiftUI
 
 struct AppearanceView: View {
+	@AppStorage("onboardingComplete") private var onboardingComplete: Bool = false
+	@AppStorage("onboardingCurrentPage") private var savedCurrentPage: Int = 1
+
 	@Environment(ContentManager.self) var contentManager
+	
+	@State private var showRestartOnboardingAlert: Bool = false
 	
 	var availableUnits: [String] = ["Fahrenheit", "Celsius"]
 	
@@ -37,6 +42,24 @@ struct AppearanceView: View {
 						}
 					}
 					.pickerStyle(.menu)
+				}
+				Section {
+					HStack {
+						Button("Restart Onboarding", role: .destructive) {
+							showRestartOnboardingAlert = true
+						}
+						.alert("Restart Onboarding?",
+							   isPresented: $showRestartOnboardingAlert) {
+							Button("Yes", role: .destructive) {
+								savedCurrentPage = 0
+								
+								onboardingComplete = false
+							}
+							Button("Cancel", role: .cancel) { }
+						} message: {
+							Text("This will restart the onboarding process. Some settings may be lost.")
+						}
+					}
 				}
 			}
 			.navigationTitle("Appearance")
