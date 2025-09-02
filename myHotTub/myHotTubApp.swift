@@ -1,5 +1,6 @@
 
 import SwiftUI
+import WhatsNewKit
 
 @main
 struct myHotTubApp: App {
@@ -11,6 +12,13 @@ struct myHotTubApp: App {
             ContentView()
 				.environment(contentManager)
 				.environment(connectionManager)
+				.environment(
+					\.whatsNew,
+					 WhatsNewEnvironment(
+						 versionStore: UserDefaultsWhatsNewVersionStore(),
+						 whatsNewCollection: self
+					 )
+				)
         }
     }
 }

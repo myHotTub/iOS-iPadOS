@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		650884802E5F74A900CE66E0 /* WhatsNewKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6508847F2E5F74A900CE66E0 /* WhatsNewKit */; };
 		6543B0F62E47DACB006F356C /* LiteSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 6543B0F52E47DACB006F356C /* LiteSlider */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				650884802E5F74A900CE66E0 /* WhatsNewKit in Frameworks */,
 				6543B0F62E47DACB006F356C /* LiteSlider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = myHotTub;
 			packageProductDependencies = (
 				6543B0F52E47DACB006F356C /* LiteSlider */,
+				6508847F2E5F74A900CE66E0 /* WhatsNewKit */,
 			);
 			productName = myHotTub;
 			productReference = 654B2C6A2E3E743C00C8C717 /* myHotTub.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				6543B0F42E47DACB006F356C /* XCRemoteSwiftPackageReference "LiteSlider" */,
+				6508847E2E5F74A900CE66E0 /* XCRemoteSwiftPackageReference "WhatsNewKit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 654B2C6B2E3E743C00C8C717 /* Products */;
@@ -293,7 +297,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = myHotTub.myHotTub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -329,7 +333,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.2;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = myHotTub.myHotTub;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -366,6 +370,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		6508847E2E5F74A900CE66E0 /* XCRemoteSwiftPackageReference "WhatsNewKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SvenTiigi/WhatsNewKit.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.2.1;
+			};
+		};
 		6543B0F42E47DACB006F356C /* XCRemoteSwiftPackageReference "LiteSlider" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SylvainRX/LiteSlider.git";
@@ -377,6 +389,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6508847F2E5F74A900CE66E0 /* WhatsNewKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6508847E2E5F74A900CE66E0 /* XCRemoteSwiftPackageReference "WhatsNewKit" */;
+			productName = WhatsNewKit;
+		};
 		6543B0F52E47DACB006F356C /* LiteSlider */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6543B0F42E47DACB006F356C /* XCRemoteSwiftPackageReference "LiteSlider" */;
