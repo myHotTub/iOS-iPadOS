@@ -11,14 +11,18 @@ class ConnectionManager {
 			case webSocketSecure = "wss://"
 		}
 		
+		#if DEBUG_BUILD
 		// MARK: Testing Configuration
-//		static let defaultHostname: String = "layzspa-test.local"
-//		static let defaultPort: Int        = 8080
+		static let defaultHostname: String = "layzspa-test.local"
+		static let defaultIp: String       = "192.168.4.2"
+		static let defaultPort: Int        = 8080
 		
+		#else
 		// MARK: Live Configuration
 		static let defaultHostname: String = "layzspa.local"
 		static let defaultIp: String       = "192.168.4.2"
 		static let defaultPort: Int        = 81
+		#endif
 		
 		let defaultModuleUrl: String  = "\(WebSocketSchemes.webSocket.rawValue)\(defaultHostname):\(defaultPort)"
 		let fallbackModuleUrl: String = "\(WebSocketSchemes.webSocket.rawValue)\(defaultIp):\(defaultPort)"

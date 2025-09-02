@@ -117,7 +117,11 @@ class ScheduleManager {
 	var isDeletingLegacy: Bool     = false
 	var deletionProgress: Int      = 0
 	
+	#if DEBUG_BUILD
+	private let baseUrl = "http://layzspa-test.local"
+	#else
 	private let baseUrl = "http://layzspa.local"
+	#endif
 	
 	// API Endpoints
 	private var getCommandsUrl: URL { URL(string: "\(baseUrl)/getcommands/")! }
