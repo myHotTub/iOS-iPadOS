@@ -117,7 +117,7 @@ struct TemperatureControlSheet: View {
 							.fontWeight(.medium)
 							.foregroundStyle(.white)
 					}
-					.fullScreenCover(isPresented: $showScheduleView) {
+					.sheet(isPresented: $showScheduleView) {
 						ScheduleView()
 					}
 				}
