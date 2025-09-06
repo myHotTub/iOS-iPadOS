@@ -123,15 +123,15 @@ struct ScheduleView: View {
 			}
 			.navigationTitle("Schedule")
 			.toolbar {
-				ToolbarItem(placement: .cancellationAction) {
-					Button {
-						dismiss()
-					} label: {
-						Image(systemName: "xmark")
-							.fontWeight(.medium)
-							.foregroundColor(.blue)
-					}
-				}
+//				ToolbarItem(placement: .cancellationAction) {
+//					Button {
+//						dismiss()
+//					} label: {
+//						Image(systemName: "xmark")
+//							.fontWeight(.medium)
+//							.foregroundColor(.blue)
+//					}
+//				}
 				
 				ToolbarItemGroup(placement: .primaryAction) {
 					Button {
