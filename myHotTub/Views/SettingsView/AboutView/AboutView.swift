@@ -3,58 +3,58 @@ import SwiftUI
 
 struct AboutView: View {
 	@Environment(ContentManager.self) var contentManager
-	
-	let appName: String    = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String)!
-	let appVersion: String = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String)!
-	
-    var body: some View {
+
+	let appBuild: String   = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+	let appName: String    = Bundle.main.infoDictionary?["CFBundleDisplayName"] as? String ?? "Unknown"
+	let appVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+
+	var body: some View {
 		NavigationStack {
 			List {
+				//MARK: Hero Section
 				Section {
-					VStack(alignment: .center) {
+					VStack(spacing: 20) {
 						Image(systemName: "figure.water.fitness")
-							.font(.system(size: 70))
-							.frame(maxWidth: .infinity, alignment: .center)
-							.padding(.top, 2)
-							.padding(.bottom, 1)
+							.font(.system(size: 80, weight: .light))
+							.foregroundStyle(.blue)
+							.symbolRenderingMode(.hierarchical)
 						
-						Text("\(appName)")
-							.font(.title)
-							.fontWeight(.bold)
-							.padding(.bottom, 1)
-							.frame(maxWidth: .infinity, alignment: .center)
+						Text(appName)
+							.font(.largeTitle)
+							.fontWeight(.medium)
+							.fontDesign(.rounded)
 						
-						Text("Manage your Lay-Z-Spa Hot Tub installed with an ESP8266 from your \(UIDevice.current.model). This project was made possible due to the work by visualapproach. [Learn more...](https://github.com/visualapproach/WiFi-remote-for-Bestway-Lay-Z-SPA)")
+						Text("Take control of your Lay-Z-Spa Hot Tub from your \(UIDevice.current.model). Requires an ESP8266 module installation. Special thanks to visualapproach for the foundational work. \n[Learn more...](https://github.com/visualapproach/WiFi-remote-for-Bestway-Lay-Z-SPA)")
+							.font(.subheadline)
+							.foregroundStyle(.secondary)
 							.multilineTextAlignment(.center)
-							.frame(maxWidth: .infinity, alignment: .center)
+							.fixedSize(horizontal: false, vertical: true)
 					}
+					.frame(maxWidth: .infinity)
+				}
+				.listRowBackground(Color.clear)
+				.listRowSeparator(.hidden)
+				
+				//MARK: App Information Section
+				Section("App Information") {
+					LabeledContent("App Version", value: "\(appVersion) (\(appBuild))")
 				}
 				
-				Section(header: Text("Application Information")) {
-					HStack {
-						Text("App Version")
-						Spacer()
-						Text("\(appVersion)")
-					}
-				}
-				
-				Section(header: Text("ESP8266 Module Information")) {
-					HStack {
-						Text("Firmware Version")
-						Spacer()
-						Text("\(contentManager.other.fw ?? "Unknown")")
-					}
+				//MARK: ESP8266 Module Information Section
+				Section("ESP8266 Module Information") {
+					LabeledContent("Firmware Version", value: contentManager.other.fw ?? "Unknown")
 				}
 			}
 			.navigationTitle("About")
 			.navigationBarTitleDisplayMode(.inline)
+			.listStyle(.insetGrouped)
 		}
-    }
+	}
 }
 
 #Preview {
 	let contentManager = ContentManager()
 	
-    AboutView()
+	AboutView()
 		.environment(contentManager)
 }
