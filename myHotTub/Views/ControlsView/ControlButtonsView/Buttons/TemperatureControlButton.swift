@@ -78,7 +78,7 @@ struct TemperatureControlButton: View {
 		.buttonStyle(.plain)
 		.contentShape(Rectangle())
 		.clipShape(RoundedRectangle(cornerRadius: 15))
-		.sheet(isPresented: $showTemperatureControlSheet) {
+		.fullScreenCover(isPresented: $showTemperatureControlSheet) {
 			TemperatureControlSheet()
 		}
 	}

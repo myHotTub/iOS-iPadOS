@@ -5,6 +5,8 @@ struct TemperatureControlSheet: View {
 	@Environment(ContentManager.self) var contentManager
 	@Environment(\.dismiss) private var dismiss
 	
+	@State private var showScheduleView: Bool = false
+	
 	var heaterState: (icon: String, description: String, color: Color, ready: String) {
 		guard contentManager.connectionMonitor.isConnected else {
 			return ("antenna.radiowaves.left.and.right.slash", "--", .gray, "Not Connected")
@@ -107,6 +109,19 @@ struct TemperatureControlSheet: View {
 					Text("Hot Tub")
 						.foregroundColor(.white)
 				}
+				ToolbarItemGroup(placement: .topBarTrailing) {
+					Button {
+						showScheduleView.toggle()
+					} label: {
+						Image(systemName: "calendar")
+							.fontWeight(.medium)
+							.foregroundStyle(.white)
+					}
+					.sheet(isPresented: $showScheduleView) {
+						ScheduleView()
+					}
+				}
+				
 			}
 			.background(
 				LinearGradient(

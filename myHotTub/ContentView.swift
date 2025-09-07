@@ -8,6 +8,8 @@ struct ContentView: View {
 		TabView {
 			ControlsView()
 				.tabItem {Label("Controls", systemImage: "switch.2")}
+			ScheduleView()
+				.tabItem {Label("Schedules", systemImage: "calendar")}
 			SettingsView()
 				.tabItem {Label("Settings", systemImage: "gear")}
 		}

@@ -1,5 +1,6 @@
 
 import SwiftUI
+import WhatsNewKit
 
 struct ControlsView: View {
 	@Environment(ContentManager.self) var contentManager
@@ -32,6 +33,7 @@ struct ControlsView: View {
 				}
 			}
 		}
+		.whatsNewSheet()
 	}
 }
 

@@ -1,5 +1,5 @@
 {
-  "originHash" : "d9cf654461b963e2dd9887c078d422ca355baa1eef3e8beae8b775e726abc4a6",
+  "originHash" : "fecd8b6d5d9d285769c22cc2be77d51f0c84868e2ac7d3a4ae269f14c4ce5f64",
   "pins" : [
     {
       "identity" : "liteslider",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "7f44646e01361a4670c7d2b6bb109790e94bd043",
         "version" : "0.1.1"
+      }
+    },
+    {
+      "identity" : "whatsnewkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SvenTiigi/WhatsNewKit.git",
+      "state" : {
+        "revision" : "6157c77e8be9b3d2310bc680681b61a8d9e290ac",
+        "version" : "2.2.1"
       }
     }
   ],
