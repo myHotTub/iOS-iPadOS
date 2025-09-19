@@ -44,7 +44,7 @@ struct DetailedScheduleView: View {
 	}
 
 	var body: some View {
-		NavigationView {
+		NavigationStack {
 			VStack(spacing: 0) {
 				Form {
 					Section("Times") {
