@@ -33,6 +33,7 @@ struct ControlButtonsView: View {
 					}
 				}
 			}
+			.scaleEffect(0.975)
 			.fixedSize(horizontal: false, vertical: true)
 			.frame(maxWidth: maxSize, maxHeight: maxSize)
 		}

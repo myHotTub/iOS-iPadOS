@@ -35,7 +35,7 @@ struct AddScheduleView: View {
 
 	
 	var body: some View {
-		NavigationView {
+		NavigationStack {
 			Form {
 				Section("Times") {
 					DatePicker("Start", selection: $startTime, displayedComponents: [.hourAndMinute])

@@ -66,12 +66,15 @@ struct TemperatureControlButton: View {
 						}
 						.font(.subheadline)
 						.foregroundStyle(Color.white)
+						.padding(.leading, 3)
 						
 						Text("\(heaterState.description)")
 							.font(.subheadline)
 							.foregroundStyle(Color.white)
+							.padding(.leading, 3)
 					}
-					.padding(.all, 10)
+					.padding(.horizontal, 10)
+					.padding(.bottom, 10)
 				}
 			}
 		}

@@ -13,11 +13,11 @@ struct TemperatureControlSheet: View {
 		}
 	
 		switch (contentManager.states.pwr, contentManager.states.flt, contentManager.states.grn, contentManager.states.red) {
-		case (0, _, _, _): return ("power", "OFF", .gray, "Enable heater to view the ready in estimate")
-		case (1, 0, _, _): return ("power", "Filter Off", .gray, "Enable heater to view the ready in estimate")
+		case (0, _, _, _): return ("power", "OFF", .gray, "Enable heater to view the estimate")
+		case (1, 0, _, _): return ("power", "Filter Off", .gray, "Enable heater to view the estimate")
 		case (1, 1, 0, 0):
 			if (contentManager.states.tmp < contentManager.states.tgt) {
-				return ("arrow.trianglehead.2.counterclockwise", "Filter On", .blue, "Enable heater to view the ready in estimate")
+				return ("arrow.trianglehead.2.counterclockwise", "Filter On", .blue, "Enable heater to view the estimate")
 			} else {
 				return ("arrow.trianglehead.2.counterclockwise", "Filter On", .blue, "Now")
 			}
@@ -109,18 +109,18 @@ struct TemperatureControlSheet: View {
 					Text("Hot Tub")
 						.foregroundColor(.white)
 				}
-				ToolbarItemGroup(placement: .topBarTrailing) {
-					Button {
-						showScheduleView.toggle()
-					} label: {
-						Image(systemName: "calendar")
-							.fontWeight(.medium)
-							.foregroundStyle(.white)
-					}
-					.sheet(isPresented: $showScheduleView) {
-						ScheduleView()
-					}
-				}
+//				ToolbarItemGroup(placement: .topBarTrailing) {
+//					Button {
+//						showScheduleView.toggle()
+//					} label: {
+//						Image(systemName: "calendar")
+//							.fontWeight(.medium)
+//							.foregroundStyle(.white)
+//					}
+//					.sheet(isPresented: $showScheduleView) {
+//						ScheduleView()
+//					}
+//				}
 				
 			}
 			.background(
