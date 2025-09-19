@@ -29,7 +29,7 @@ struct ScheduleView: View {
 	}
 	
 	var body: some View {
-		NavigationView {
+		NavigationStack {
 			VStack(spacing: 0) {
 				// MARK: Legacy Warning Banner
 				if hasLegacySchedules {
@@ -133,14 +133,20 @@ struct ScheduleView: View {
 //					}
 //				}
 				
-				ToolbarItemGroup(placement: .primaryAction) {
+				ToolbarItem {
 					Button {
 						scheduleManager.refresh()
 					} label: {
 						Image(systemName: "arrow.clockwise")
 							.fontWeight(.medium)
 					}
-					
+				}
+				
+				if #available(iOS 26.0, *) {
+					ToolbarSpacer(.fixed)
+				}
+				
+				ToolbarItem {
 					if !hasLegacySchedules {
 						Button {
 							showingAddSchedule = true
