@@ -29,7 +29,7 @@ struct ScheduleView: View {
 	}
 	
 	var body: some View {
-		NavigationView {
+		NavigationStack {
 			VStack(spacing: 0) {
 				// MARK: Legacy Warning Banner
 				if hasLegacySchedules {
@@ -133,14 +133,20 @@ struct ScheduleView: View {
 //					}
 //				}
 				
-				ToolbarItemGroup(placement: .primaryAction) {
+				ToolbarItem {
 					Button {
 						scheduleManager.refresh()
 					} label: {
 						Image(systemName: "arrow.clockwise")
 							.fontWeight(.medium)
 					}
-					
+				}
+				
+				if #available(iOS 26.0, *) {
+					ToolbarSpacer(.fixed)
+				}
+				
+				ToolbarItem {
 					if !hasLegacySchedules {
 						Button {
 							showingAddSchedule = true
@@ -202,7 +208,7 @@ struct LegacyWarningBanner: View {
 					Text("Legacy Schedules Detected")
 						.fontWeight(.semibold)
 					
-					Text("\(legacyCount) legacy schedule\(legacyCount == 1 ? "" : "s") created outside of myHotTub \(legacyCount == 1 ? "was" : "were") found. \(legacyCount == 1 ? "This schedule" : "These schedules") must be removed before you can create schedules using myHotTub.")
+					Text("Legacy schedules created outside of myHotTub were found. These schedules must be removed before you can create schedules using myHotTub.")
 						.font(.caption)
 						.foregroundColor(.secondary)
 				}

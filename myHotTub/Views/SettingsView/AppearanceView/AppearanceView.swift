@@ -2,6 +2,8 @@
 import SwiftUI
 
 struct AppearanceView: View {
+	@AppStorage("appearanceMode") private var appearanceMode: AppearanceMode = .system
+	
 	@Environment(ContentManager.self) var contentManager
 	
 	var availableUnits: [String] = ["Fahrenheit", "Celsius"]
@@ -22,6 +24,13 @@ struct AppearanceView: View {
 		NavigationStack {
 			List {
 				Section {
+					Picker("Appearance", selection: $appearanceMode) {
+						ForEach (AppearanceMode.allCases) { mode in
+							Text(mode.rawValue).tag(mode)
+						}
+					}
+					.pickerStyle(.menu)
+					
 					Picker("Temperature Unit", selection: Binding(
 						get: { contentManager.states.unt ?? 0 },
 						set: { newValue in
