@@ -59,14 +59,13 @@ struct TemperatureControlButton: View {
 							.foregroundStyle(Color.white)
 							.padding(.bottom, 10)
 						
-						Group {
-							Text("Set to ") +
-							Text("\(waterTemperature.target)°")
-								.fontWeight(.bold)
-						}
-						.font(.subheadline)
-						.foregroundStyle(Color.white)
-						.padding(.leading, 3)
+						let targetTemperature = Text("\(waterTemperature.target)°")
+							.fontWeight(.bold)
+
+						Text("Set to \(targetTemperature)")
+							.font(.subheadline)
+							.foregroundStyle(Color.white)
+							.padding(.leading, 3)
 						
 						Text("\(heaterState.description)")
 							.font(.subheadline)

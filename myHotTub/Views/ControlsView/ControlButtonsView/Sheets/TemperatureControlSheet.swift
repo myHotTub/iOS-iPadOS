@@ -56,17 +56,13 @@ struct TemperatureControlSheet: View {
 		NavigationStack {
 			VStack {
 				HStack {
-					Group {
-						Text("Temperature ") +
-						Text("\(temperature.water)°")
-							.fontWeight(.bold)
-					}
+					let currentTemperature = Text("\(temperature.water)°")
+						.fontWeight(.bold)
+					Text("Temperature \(currentTemperature)")
 					
-					Group {
-						Text("Ambient ") +
-						Text("\(temperature.ambient)°")
-							.fontWeight(.bold)
-					}
+					let ambientTemperature = Text("\(temperature.ambient)°")
+						.fontWeight(.bold)
+					Text("Ambient \(ambientTemperature)")
 				}
 				.foregroundColor(.white)
 				
@@ -109,19 +105,6 @@ struct TemperatureControlSheet: View {
 					Text("Hot Tub")
 						.foregroundColor(.white)
 				}
-//				ToolbarItemGroup(placement: .topBarTrailing) {
-//					Button {
-//						showScheduleView.toggle()
-//					} label: {
-//						Image(systemName: "calendar")
-//							.fontWeight(.medium)
-//							.foregroundStyle(.white)
-//					}
-//					.sheet(isPresented: $showScheduleView) {
-//						ScheduleView()
-//					}
-//				}
-				
 			}
 			.background(
 				LinearGradient(
@@ -134,7 +117,6 @@ struct TemperatureControlSheet: View {
 				)
 			)
 		}
-		
     }
 }
 

@@ -208,7 +208,7 @@ struct LegacyWarningBanner: View {
 					Text("Legacy Schedules Detected")
 						.fontWeight(.semibold)
 					
-					Text("\(legacyCount) legacy schedule\(legacyCount == 1 ? "" : "s") created outside of myHotTub \(legacyCount == 1 ? "was" : "were") found. \(legacyCount == 1 ? "This schedule" : "These schedules") must be removed before you can create schedules using myHotTub.")
+					Text("Legacy schedules created outside of myHotTub were found. These schedules must be removed before you can create schedules using myHotTub.")
 						.font(.caption)
 						.foregroundColor(.secondary)
 				}
